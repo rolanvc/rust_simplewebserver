@@ -1,6 +1,6 @@
 use std::io::prelude::*;
-use std::net::TcpListener;
-use std::net::TcpStream;
+use std::net::{TcpListener,TcpStream };
+use std::io::BufReader;
 use std::fs;
 
 fn main() {
@@ -13,6 +13,11 @@ fn main() {
 }
 
 fn handle_connection(mut stream: TcpStream){
+        // Read all the headers
+        // for header in BufReader::new(&mut stream).lines() {
+        //    let header = header.unwrap();
+        //    if header == "\r" { break }
+        // }
     let mut buffer = [0;512];
     stream.read(&mut buffer).unwrap();
     let contents = fs::read_to_string("hello.html").unwrap();
